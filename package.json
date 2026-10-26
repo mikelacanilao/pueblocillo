@@ -1,0 +1,11 @@
+{
+  "name": "pueblocillo-root",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "npm --prefix pueblocillo-app run dev",
+    "build": "npm --prefix pueblocillo-app run build",
+    "start": "npm --prefix pueblocillo-app run start",
+    "lint": "npm --prefix pueblocillo-app run lint"
+  }
+}
