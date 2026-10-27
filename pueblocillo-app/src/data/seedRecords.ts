@@ -7,7 +7,7 @@ export const INITIAL_CENSUS_RECORDS: HouseholdCensusRecord[] = [
     lot: 1,
     street: 'Main Entrance Ave. (Blk 1 & 11)',
     occupancyType: 'owner',
-    ownerName: 'Eduardo & Lorna Villanueva',
+    ownerName: 'Pueblocillo HOA Association',
     ownerContact: '0917-801-2234',
     tenantName: '',
     tenantContact: '',

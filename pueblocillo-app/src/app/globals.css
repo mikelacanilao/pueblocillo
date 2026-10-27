@@ -18,6 +18,26 @@ body {
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
+/* Keep browser autofill aligned with theme colors */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+  -webkit-text-fill-color: #0f172a;
+  transition: background-color 9999s ease-in-out 0s;
+  box-shadow: 0 0 0 1000px #f8fafc inset;
+}
+
+.dark input:-webkit-autofill,
+.dark input:-webkit-autofill:hover,
+.dark input:-webkit-autofill:focus,
+.dark textarea:-webkit-autofill,
+.dark select:-webkit-autofill {
+  -webkit-text-fill-color: #f1f5f9;
+  box-shadow: 0 0 0 1000px #1e293b inset;
+}
+
 /* Custom scrollbars */
 .custom-scrollbar::-webkit-scrollbar {
   width: 6px;

@@ -182,9 +182,11 @@ export const CensusEncoderForm: React.FC<CensusEncoderFormProps> = ({
   };
 
   const currentBlockLots = BLUEPRINT_BLOCKS.find((b) => b.block === block)?.lots || 30;
+  const fieldClassName = 'w-full rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-800/60 px-3.5 py-2.5 text-sm font-medium text-slate-800 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:bg-white dark:focus:bg-slate-800 focus:border-emerald-600 focus:outline-none focus:ring-2 focus:ring-emerald-500/20';
+  const labelClassName = 'block text-xs font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wider mb-1';
 
   return (
-    <div className="bg-white rounded-2xl border border-slate-200/80 shadow-sm overflow-hidden">
+    <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-sm overflow-hidden">
       {/* Header */}
       <div className="bg-gradient-to-r from-emerald-800 to-teal-800 p-6 text-white flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
@@ -250,20 +252,20 @@ export const CensusEncoderForm: React.FC<CensusEncoderFormProps> = ({
       <form onSubmit={handleSubmit} className="p-6 space-y-6">
         {/* Step 1: Property Location (Block + Lot + Street) */}
         <div className="space-y-4">
-          <div className="flex items-center gap-2 border-b border-slate-100 pb-2">
+          <div className="flex items-center gap-2 border-b border-slate-100 dark:border-slate-800 pb-2">
             <MapPin className="w-4 h-4 text-emerald-700" />
-            <h3 className="font-bold text-slate-800 text-base">1. Property Location (Block + Lot + Street)</h3>
+            <h3 className="font-bold text-slate-800 dark:text-slate-100 text-base">1. Property Location (Block + Lot + Street)</h3>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div>
-              <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1">
+              <label className={labelClassName}>
                 Block Number (1–23) *
               </label>
               <select
                 value={block}
                 onChange={(e) => setBlock(Number(e.target.value))}
-                className="w-full rounded-xl border border-slate-300 bg-slate-50/50 px-3.5 py-2.5 text-sm font-medium text-slate-800 focus:bg-white focus:border-emerald-600 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
+                className={fieldClassName}
               >
                 {BLUEPRINT_BLOCKS.map((b) => (
                   <option key={b.block} value={b.block}>
@@ -274,7 +276,7 @@ export const CensusEncoderForm: React.FC<CensusEncoderFormProps> = ({
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1">
+              <label className={labelClassName}>
                 Lot Number (1–{currentBlockLots}) *
               </label>
               <input
@@ -284,18 +286,18 @@ export const CensusEncoderForm: React.FC<CensusEncoderFormProps> = ({
                 value={lot}
                 onChange={(e) => setLot(Number(e.target.value))}
                 required
-                className="w-full rounded-xl border border-slate-300 bg-slate-50/50 px-3.5 py-2.5 text-sm font-medium text-slate-800 focus:bg-white focus:border-emerald-600 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
+                className={fieldClassName}
               />
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1">
+              <label className={labelClassName}>
                 Street / Village Zone *
               </label>
               <select
                 value={street}
                 onChange={(e) => setStreet(e.target.value)}
-                className="w-full rounded-xl border border-slate-300 bg-slate-50/50 px-3.5 py-2.5 text-sm font-medium text-slate-800 focus:bg-white focus:border-emerald-600 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
+                className={fieldClassName}
               >
                 {DEFAULT_STREETS.map((st) => (
                   <option key={st} value={st}>
@@ -309,9 +311,9 @@ export const CensusEncoderForm: React.FC<CensusEncoderFormProps> = ({
 
         {/* Step 2: Occupancy Classification */}
         <div className="space-y-4">
-          <div className="flex items-center gap-2 border-b border-slate-100 pb-2">
+          <div className="flex items-center gap-2 border-b border-slate-100 dark:border-slate-800 pb-2">
             <Building2 className="w-4 h-4 text-emerald-700" />
-            <h3 className="font-bold text-slate-800 text-base">2. Occupancy Classification</h3>
+            <h3 className="font-bold text-slate-800 dark:text-slate-100 text-base">2. Occupancy Classification</h3>
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
@@ -326,11 +328,11 @@ export const CensusEncoderForm: React.FC<CensusEncoderFormProps> = ({
                 className={`relative flex flex-col p-3 rounded-xl border cursor-pointer transition ${
                   occupancyType === item.id
                     ? 'border-emerald-600 bg-emerald-50/60 ring-2 ring-emerald-500/20'
-                    : 'border-slate-200 bg-white hover:bg-slate-50'
+                    : 'border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700/60'
                 }`}
               >
                 <div className="flex items-center justify-between mb-1">
-                  <span className="font-semibold text-sm text-slate-800">{item.label}</span>
+                  <span className="font-semibold text-sm text-slate-800 dark:text-slate-100">{item.label}</span>
                   <input
                     type="radio"
                     name="occupancyType"
@@ -340,7 +342,7 @@ export const CensusEncoderForm: React.FC<CensusEncoderFormProps> = ({
                     className="text-emerald-600 focus:ring-emerald-500"
                   />
                 </div>
-                <span className="text-xs text-slate-500 leading-snug">{item.desc}</span>
+                <span className="text-xs text-slate-500 dark:text-slate-400 leading-snug">{item.desc}</span>
               </label>
             ))}
           </div>
@@ -348,14 +350,14 @@ export const CensusEncoderForm: React.FC<CensusEncoderFormProps> = ({
 
         {/* Step 3: Registered Owner Details */}
         <div className="space-y-4">
-          <div className="flex items-center gap-2 border-b border-slate-100 pb-2">
+          <div className="flex items-center gap-2 border-b border-slate-100 dark:border-slate-800 pb-2">
             <User className="w-4 h-4 text-emerald-700" />
-            <h3 className="font-bold text-slate-800 text-base">3. Registered Homeowner Information</h3>
+            <h3 className="font-bold text-slate-800 dark:text-slate-100 text-base">3. Registered Homeowner Information</h3>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1">
+              <label className={labelClassName}>
                 Registered Owner Name(s) *
               </label>
               <input
@@ -364,12 +366,12 @@ export const CensusEncoderForm: React.FC<CensusEncoderFormProps> = ({
                 value={ownerName}
                 onChange={(e) => setOwnerName(e.target.value)}
                 required
-                className="w-full rounded-xl border border-slate-300 bg-slate-50/50 px-3.5 py-2.5 text-sm font-medium text-slate-800 focus:bg-white focus:border-emerald-600 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
+                className={fieldClassName}
               />
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1">
+              <label className={labelClassName}>
                 Owner Contact Number / Email
               </label>
               <input
@@ -377,7 +379,7 @@ export const CensusEncoderForm: React.FC<CensusEncoderFormProps> = ({
                 placeholder="e.g. 0917-123-4567 or email@domain.com"
                 value={ownerContact}
                 onChange={(e) => setOwnerContact(e.target.value)}
-                className="w-full rounded-xl border border-slate-300 bg-slate-50/50 px-3.5 py-2.5 text-sm font-medium text-slate-800 focus:bg-white focus:border-emerald-600 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
+                className={fieldClassName}
               />
             </div>
           </div>
@@ -385,15 +387,15 @@ export const CensusEncoderForm: React.FC<CensusEncoderFormProps> = ({
 
         {/* Step 4: Tenant / Renter Details (Conditional) */}
         {occupancyType === 'renter' && (
-          <div className="space-y-4 bg-teal-50/40 p-4 rounded-xl border border-teal-200/80">
-            <div className="flex items-center gap-2 border-b border-teal-200/60 pb-2">
+          <div className="space-y-4 bg-teal-50/40 dark:bg-teal-950/20 p-4 rounded-xl border border-teal-200/80 dark:border-teal-900/60">
+            <div className="flex items-center gap-2 border-b border-teal-200/60 dark:border-teal-900/50 pb-2">
               <Users className="w-4 h-4 text-teal-700" />
-              <h3 className="font-bold text-teal-900 text-base">4. Current Tenant / Renter Details</h3>
+              <h3 className="font-bold text-teal-900 dark:text-teal-200 text-base">4. Current Tenant / Renter Details</h3>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs font-semibold text-teal-900 uppercase tracking-wider mb-1">
+                <label className="block text-xs font-semibold text-teal-900 dark:text-teal-300 uppercase tracking-wider mb-1">
                   Primary Tenant / Occupant Name *
                 </label>
                 <input
@@ -402,12 +404,12 @@ export const CensusEncoderForm: React.FC<CensusEncoderFormProps> = ({
                   value={tenantName}
                   onChange={(e) => setTenantName(e.target.value)}
                   required={occupancyType === 'renter'}
-                  className="w-full rounded-xl border border-teal-300 bg-white px-3.5 py-2.5 text-sm font-medium text-slate-800 focus:border-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-500/20"
+                  className="w-full rounded-xl border border-teal-300 dark:border-teal-800 bg-white dark:bg-slate-800 px-3.5 py-2.5 text-sm font-medium text-slate-800 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:border-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-500/20"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-teal-900 uppercase tracking-wider mb-1">
+                <label className="block text-xs font-semibold text-teal-900 dark:text-teal-300 uppercase tracking-wider mb-1">
                   Tenant Contact Number
                 </label>
                 <input
@@ -415,7 +417,7 @@ export const CensusEncoderForm: React.FC<CensusEncoderFormProps> = ({
                   placeholder="e.g. 0918-987-6543"
                   value={tenantContact}
                   onChange={(e) => setTenantContact(e.target.value)}
-                  className="w-full rounded-xl border border-teal-300 bg-white px-3.5 py-2.5 text-sm font-medium text-slate-800 focus:border-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-500/20"
+                  className="w-full rounded-xl border border-teal-300 dark:border-teal-800 bg-white dark:bg-slate-800 px-3.5 py-2.5 text-sm font-medium text-slate-800 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:border-teal-600 focus:outline-none focus:ring-2 focus:ring-teal-500/20"
                 />
               </div>
             </div>
@@ -425,14 +427,14 @@ export const CensusEncoderForm: React.FC<CensusEncoderFormProps> = ({
         {/* Step 5: Household Headcount & Vulnerable Sectors */}
         {occupancyType !== 'vacant_lot' && occupancyType !== 'unoccupied' && (
           <div className="space-y-4">
-            <div className="flex items-center gap-2 border-b border-slate-100 pb-2">
+            <div className="flex items-center gap-2 border-b border-slate-100 dark:border-slate-800 pb-2">
               <Users className="w-4 h-4 text-emerald-700" />
-              <h3 className="font-bold text-slate-800 text-base">5. Household Demographics & Disaster Readiness</h3>
+              <h3 className="font-bold text-slate-800 dark:text-slate-100 text-base">5. Household Demographics & Disaster Readiness</h3>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div>
-                <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1">
+                <label className={labelClassName}>
                   Total Household Occupants
                 </label>
                 <input
@@ -441,12 +443,12 @@ export const CensusEncoderForm: React.FC<CensusEncoderFormProps> = ({
                   max={30}
                   value={totalOccupants}
                   onChange={(e) => setTotalOccupants(Number(e.target.value))}
-                  className="w-full rounded-xl border border-slate-300 bg-slate-50/50 px-3.5 py-2.5 text-sm font-medium text-slate-800 focus:bg-white focus:border-emerald-600 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
+                  className={fieldClassName}
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1">
+                <label className={labelClassName}>
                   Senior Citizens (60+)
                 </label>
                 <input
@@ -455,12 +457,12 @@ export const CensusEncoderForm: React.FC<CensusEncoderFormProps> = ({
                   max={totalOccupants}
                   value={seniorsCount}
                   onChange={(e) => setSeniorsCount(Number(e.target.value))}
-                  className="w-full rounded-xl border border-slate-300 bg-slate-50/50 px-3.5 py-2.5 text-sm font-medium text-slate-800 focus:bg-white focus:border-emerald-600 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
+                  className={fieldClassName}
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1">
+                <label className={labelClassName}>
                   Persons with Disabilities (PWD)
                 </label>
                 <input
@@ -469,7 +471,7 @@ export const CensusEncoderForm: React.FC<CensusEncoderFormProps> = ({
                   max={totalOccupants}
                   value={pwdCount}
                   onChange={(e) => setPwdCount(Number(e.target.value))}
-                  className="w-full rounded-xl border border-slate-300 bg-slate-50/50 px-3.5 py-2.5 text-sm font-medium text-slate-800 focus:bg-white focus:border-emerald-600 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
+                  className={fieldClassName}
                 />
               </div>
             </div>
@@ -477,8 +479,8 @@ export const CensusEncoderForm: React.FC<CensusEncoderFormProps> = ({
             {/* Vehicles & Plate numbers */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
               <div>
-                <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1 flex items-center gap-1.5">
-                  <Car className="w-3.5 h-3.5 text-slate-500" />
+                <label className="block text-xs font-semibold text-slate-600 dark:text-slate-400 uppercase tracking-wider mb-1 flex items-center gap-1.5">
+                  <Car className="w-3.5 h-3.5 text-slate-500 dark:text-slate-400" />
                   <span>Number of Registered Vehicles</span>
                 </label>
                 <input
@@ -487,12 +489,12 @@ export const CensusEncoderForm: React.FC<CensusEncoderFormProps> = ({
                   max={10}
                   value={vehiclesCount}
                   onChange={(e) => setVehiclesCount(Number(e.target.value))}
-                  className="w-full rounded-xl border border-slate-300 bg-slate-50/50 px-3.5 py-2.5 text-sm font-medium text-slate-800 focus:bg-white focus:border-emerald-600 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
+                  className={fieldClassName}
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1">
+                <label className={labelClassName}>
                   Vehicle Plate Numbers / Models (for gate stickers)
                 </label>
                 <input
@@ -500,7 +502,7 @@ export const CensusEncoderForm: React.FC<CensusEncoderFormProps> = ({
                   placeholder="e.g. ABC-1234 (Vios), NAE-5521 (Innova)"
                   value={vehiclePlates}
                   onChange={(e) => setVehiclePlates(e.target.value)}
-                  className="w-full rounded-xl border border-slate-300 bg-slate-50/50 px-3.5 py-2.5 text-sm font-medium text-slate-800 focus:bg-white focus:border-emerald-600 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
+                  className={fieldClassName}
                 />
               </div>
             </div>
@@ -510,7 +512,7 @@ export const CensusEncoderForm: React.FC<CensusEncoderFormProps> = ({
         {/* Step 6: Notes & Data Privacy Consent */}
         <div className="space-y-4">
           <div>
-            <label className="block text-xs font-semibold text-slate-600 uppercase tracking-wider mb-1">
+            <label className={labelClassName}>
               Encoder Remarks & Specific Lot Location Notes
             </label>
             <textarea
@@ -518,27 +520,27 @@ export const CensusEncoderForm: React.FC<CensusEncoderFormProps> = ({
               placeholder="e.g. Corner lot near rotonda, dogs on premises, special health requirements..."
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
-              className="w-full rounded-xl border border-slate-300 bg-slate-50/50 px-3.5 py-2.5 text-sm font-medium text-slate-800 focus:bg-white focus:border-emerald-600 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
+              className={fieldClassName}
             />
           </div>
 
-          <div className="p-4 rounded-xl bg-slate-50 border border-slate-200">
+          <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-700">
             <label className="flex items-start gap-3 cursor-pointer">
               <input
                 type="checkbox"
                 checked={privacyConsent}
                 onChange={(e) => setPrivacyConsent(e.target.checked)}
-                className="mt-1 h-4 w-4 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500"
+                className="mt-1 h-4 w-4 rounded border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-emerald-600 focus:ring-emerald-500"
               />
-              <span className="text-xs text-slate-600 leading-relaxed">
-                <strong className="text-slate-800">Philippine Data Privacy Act (R.A. 10173) Compliance:</strong> I certify that the information encoded herein has been verified with the household or title records strictly for Pueblocillo Village HOA administrative, census, and disaster emergency preparedness records.
+              <span className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                <strong className="text-slate-800 dark:text-slate-100">Philippine Data Privacy Act (R.A. 10173) Compliance:</strong> I certify that the information encoded herein has been verified with the household or title records strictly for Pueblocillo Village HOA administrative, census, and disaster emergency preparedness records.
               </span>
             </label>
           </div>
         </div>
 
         {/* Action Buttons */}
-        <div className="flex items-center justify-end gap-3 pt-4 border-t border-slate-100">
+        <div className="flex items-center justify-end gap-3 pt-4 border-t border-slate-100 dark:border-slate-800">
           <button
             type="submit"
             className="px-6 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-sm shadow-sm transition flex items-center gap-2"

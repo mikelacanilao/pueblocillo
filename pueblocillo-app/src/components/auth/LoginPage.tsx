@@ -33,8 +33,11 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess, onCancel }
     setErrorMessage(null);
     setIsLoading(true);
 
+    const normalizedEmail = email.trim();
+    const normalizedPassword = password.trim();
+
     setTimeout(() => {
-      const result = authenticateUser(email, password);
+      const result = authenticateUser(normalizedEmail, normalizedPassword);
       setIsLoading(false);
       if (result.success && result.user) {
         onLoginSuccess(result.user);
@@ -157,6 +160,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLoginSuccess, onCancel }
               >
                 <div className="font-bold text-slate-800 dark:text-slate-200">{acc.badge}</div>
                 <div className="text-[10px] text-slate-500 dark:text-slate-400 truncate">{acc.email}</div>
+                <div className="text-[10px] text-slate-500 dark:text-slate-400 truncate">{acc.passwordHash}</div>
               </button>
             ))}
           </div>

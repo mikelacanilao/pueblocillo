@@ -101,6 +101,7 @@ export const clearFailedAttempts = (email: string): void => {
 
 export const authenticateUser = (email: string, password: string): { success: boolean; user?: UserAccount; error?: string } => {
   const cleanEmail = email.trim().toLowerCase();
+  const cleanPassword = password.trim();
   const rateLimit = checkRateLimit(cleanEmail);
   if (rateLimit.isLocked) {
     return {
@@ -110,7 +111,7 @@ export const authenticateUser = (email: string, password: string): { success: bo
   }
 
   const match = DEMO_ACCOUNTS.find((u) => u.email.toLowerCase() === cleanEmail);
-  if (!match || match.passwordHash !== password) {
+  if (!match || match.passwordHash !== cleanPassword) {
     const failed = recordFailedAttempt(cleanEmail);
     if (failed.isLocked) {
       return {
